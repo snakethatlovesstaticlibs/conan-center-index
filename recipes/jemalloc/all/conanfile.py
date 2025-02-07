@@ -35,6 +35,10 @@ class JemallocConan(ConanFile):
         "enable_initial_exec_tls": [True, False],
         "enable_libdl": [True, False],
         "enable_prof": [True, False],
+        "enable_prof_libunwind": [True, False],
+        "enable_prof_frameptr": [True, False],
+        "disable_prof_libgcc": [True, False],
+        "disable_prof_gcc": [True, False],
     }
     default_options = {
         "shared": False,
@@ -50,6 +54,10 @@ class JemallocConan(ConanFile):
         "enable_initial_exec_tls": True,
         "enable_libdl": True,
         "enable_prof": False,
+        "enable_prof_libunwind": False,
+        "enable_prof_frameptr": False,
+        "disable_prof_libgcc": False,
+        "disable_prof_gcc": False,
     }
 
     @property
@@ -146,6 +154,10 @@ class JemallocConan(ConanFile):
             enable_disable("initial-exec-tls", self.options.enable_initial_exec_tls),
             enable_disable("libdl", self.options.enable_libdl),
             enable_disable("prof", self.options.enable_prof),
+            enable_disable("prof_libunwind", self.options.enable_prof),
+            enable_disable("prof_frameptr", self.options.enable_prof),
+            enable_disable("prof_libgcc", self.options.enable_prof),
+            enable_disable("prof_gcc", self.options.enable_prof),
         ])
         env = tc.environment()
         if is_msvc(self):
